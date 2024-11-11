@@ -76,3 +76,17 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-foreground h-full;
+  }
+}
