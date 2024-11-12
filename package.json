@@ -12,6 +12,8 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.7.5",
+    "@clerk/themes": "^2.1.37",
     "@prisma/client": "^5.21.1",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
