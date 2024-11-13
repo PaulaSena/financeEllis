@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 const name = "";
+const testedeerro = "";
 
 const Home = async () => {
   const { userId } = await auth();
