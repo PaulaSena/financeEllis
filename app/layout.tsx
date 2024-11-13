@@ -28,17 +28,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark `}
+        className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}
       >
-          <h1>Layout</h1>
+        <h1>Layout</h1>
+        <h2>Cadastrar usuario com Google funcionando corretamente</h2>
 
-        <ClerkProvider appearance={{
-        baseTheme:dark,
-          }} 
-          >
+        <ClerkProvider
+          appearance={{
+            baseTheme: dark,
+          }}
+        >
           {children}
         </ClerkProvider>
-      
       </body>
     </html>
   );
