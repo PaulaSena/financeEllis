@@ -24,14 +24,14 @@
   ],
   "rules": {
     "prettier/prettier": "error", // Integrate Prettier for consistent formatting
+    "react/react-in-jsx-scope": "off", // Desativa o aviso para importar React
+
     "no-undef": "error",
     "no-unused-vars": [
       "warn",
       { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
     ],
 
-    "react/react-in-jsx-scope": "off", // Not needed for Next.js
-    "react/jsx-uses-react": "off", // Not needed for React 17+
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
     "import/order": [

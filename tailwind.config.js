@@ -2,6 +2,7 @@
 module.exports = {
     darkMode: ["class"],
     content: [
+		"./src/**/*.{js,jsx,ts,tsx}",
     "./app/**/*.{js,ts,jsx,tsx}", // Adicione os diretórios e extensões corretas
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -57,5 +58,5 @@ module.exports = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")]
+  plugins: [require("tailwindcss-animate")],
 };
