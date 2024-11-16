@@ -20,6 +20,7 @@ model Transaction {
   amount        Decimal                  @db.Decimal(10, 2)
   categories    TransactionCategory
   paymentMethod TransactionPaymentMethod
+  description   String
   date          DateTime
   createdAt     DateTime                 @default(now())
   updatedAt     DateTime                 @updatedAt

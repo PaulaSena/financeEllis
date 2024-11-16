@@ -23,7 +23,6 @@ const transactionColumns: ColumnDef<Transaction>[] = [
       <TransactionTypeBadge transaction={transaction} />
     ),
   },
-
   {
     accessorKey: "category",
     header: "Categoria",
@@ -31,14 +30,12 @@ const transactionColumns: ColumnDef<Transaction>[] = [
     cell: ({ row: { original: transaction } }) =>
       TRANSACTION_CATEGORY_LABELS[transaction.categories],
   },
-
   {
     accessorKey: "paymentMethod",
     header: "Método de Pagamento",
     cell: ({ row: { original: transaction } }) =>
       TRANSACTION_PAYMENT_METHOD_LABELS[transaction.paymentMethod],
   },
-
   {
     accessorKey: "date",
     header: "Data",
@@ -54,6 +51,10 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         style: "currency",
         currency: "BRL",
       }).format(Number(transaction.amount)),
+  },
+  {
+    accessorKey: "description",
+    header: "Descrição",
   },
   {
     // Ações
