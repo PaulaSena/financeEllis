@@ -7,4 +7,6 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off", // Desativa o aviso para importar React
   },
+
+  
 };

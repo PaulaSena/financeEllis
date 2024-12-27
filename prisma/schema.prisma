@@ -14,11 +14,13 @@ datasource db {
 }
 
 model Transaction {
-  id            String                   @id @default(uuid())
-  name          String
-  type          TransactionType
-  amount        Decimal                  @db.Decimal(10, 2)
-  categories    TransactionCategory
+  id         String                @id @default(uuid())
+  name       String
+  type       TransactionType
+  amount     Decimal               @db.Decimal(10, 2)
+  categories TransactionCategories
+  category   TransactionCategory
+
   paymentMethod TransactionPaymentMethod
   description   String
   date          DateTime
@@ -34,6 +36,18 @@ enum TransactionType {
 }
 
 enum TransactionCategory {
+  HOUSING
+  TRANSPORTATION
+  FOOD
+  ENTERTAINMENT
+  HEALTH
+  UTILITY
+  SALARY
+  EDUCATION
+  OTHER
+}
+
+enum TransactionCategories {
   HOUSING
   TRANSPORTATION
   FOOD
