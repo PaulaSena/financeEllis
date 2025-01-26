@@ -3,6 +3,7 @@ import { Mulish } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import Navbar from "./_components/navbar";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -21,14 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mulish.className} dark antialiased`}>
-        <h1>Layout</h1>
-        <h2>Cadastrar usuario com Google funcionando corretamente</h2>
+        {/*<h1>Layout</h1>
+        <h2>Benvindo</h2>*/}
 
         <ClerkProvider
           appearance={{
             baseTheme: dark,
           }}
         >
+          <Navbar />
+
           {children}
         </ClerkProvider>
       </body>

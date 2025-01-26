@@ -1,4 +1,6 @@
 {
+  "parser": "@typescript-eslint/parser",
+
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -12,7 +14,9 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+
+    "plugin: next/core-web-vitals"
   ],
   "plugins": [
     "@typescript-eslint",
@@ -23,6 +27,8 @@
     "prettier"
   ],
   "rules": {
+    "@typescript-eslint/no-unused-vars": "warn",
+
     "prettier/prettier": "error", // Integrate Prettier for consistent formatting
     "react/react-in-jsx-scope": "off", // Desativa o aviso para importar React
 

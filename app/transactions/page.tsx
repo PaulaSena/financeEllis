@@ -20,7 +20,12 @@ const TransactionsPage = async () => {
       </div>
       {/*RENDERIZANDO A TABELA CRIADA NO COLUMNS INDEX*/}
 
-      <DataTable columns={transactionColumns} data={transactions} w-full />
+      <DataTable
+        columns={transactionColumns}
+        data={transactions}
+        w-full
+        h-full
+      />
     </div>
   );
 };
