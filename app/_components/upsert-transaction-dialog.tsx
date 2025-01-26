@@ -27,7 +27,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import {
-  TRANSACTION_CATEGORY_OPTIONS,
+  TRANSACTION_CATEGORIES_OPTIONS,
   TRANSACTION_PAYMENT_METHOD_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
 } from "../_constants/transactions";
@@ -35,7 +35,7 @@ import { DatePicker } from "./ui/date-picker";
 import { z } from "zod";
 import {
   TransactionType,
-  TransactionCategory,
+  TransactionRecurrenceType,
   TransactionCategories,
   TransactionPaymentMethod,
 } from "@prisma/client";
@@ -64,10 +64,20 @@ const formSchema = z.object({
   type: z.nativeEnum(TransactionType, {
     required_error: "O tipo é obrigatório.",
   }),
-  category: z.nativeEnum(TransactionCategory, {
+  /* category: z.nativeEnum(TransactionCategory, {
     required_error: "A categoria é obrigatória.",
+  }),*/
+  isRecurring: z.boolean().optional(),
+  recurrenceType: z.enum(["MONTHLY", "WEEKLY", "DAILY"]).optional(),
+  installments: z
+    .number()
+    .positive("O número de parcelas deve ser positivo.")
+    .min(1, "Deve haver pelo menos uma parcela.")
+    .optional(),
+
+  categories: z.nativeEnum(TransactionCategories, {
+    required_error: "As categorias são obrigatórias.",
   }),
-  categories: z.nativeEnum(TransactionCategories, {}),
   paymentMethod: z.nativeEnum(TransactionPaymentMethod, {
     required_error: "O método de pagamento é obrigatório.",
   }),
@@ -92,7 +102,10 @@ const UpsertTransactionDialog = ({
     defaultValues: defaultValues ?? {
       name: "",
       amount: 50,
-      category: TransactionCategory.OTHER,
+
+      isRecurring: false,
+      recurrenceType: TransactionRecurrenceType.DAILY,
+
       categories: TransactionCategories.OTHER,
 
       paymentMethod: TransactionPaymentMethod.CASH,
@@ -107,7 +120,6 @@ const UpsertTransactionDialog = ({
       await upsertTransaction({
         ...data,
         id: transactionId,
-        description: "",
       });
       setIsOpen(false);
       form.reset();
@@ -184,32 +196,76 @@ const UpsertTransactionDialog = ({
 
             <FormField
               control={form.control}
-              name="category"
+              name="isRecurring"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Categoria</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
+                  <FormLabel>Pagamento Recorrente</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={(value) =>
+                        field.onChange(value === "true")
+                      }
+                      defaultValue={field.value ? "true" : "false"}
+                    >
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione a categoria" />
+                        <SelectValue placeholder="Selecione se é recorrente" />
                       </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {TRANSACTION_CATEGORY_OPTIONS.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
+                      <SelectContent>
+                        <SelectItem value="true">Sim</SelectItem>
+                        <SelectItem value="false">Não</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {form.watch("isRecurring") && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="recurrenceType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tipo de Recorrência</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione o tipo de recorrência" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="DAILY">Diária</SelectItem>
+                          <SelectItem value="WEEKLY">Semanal</SelectItem>
+                          <SelectItem value="MONTHLY">Mensal</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="installments"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Número de Parcelas</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Digite o número de parcelas"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
 
             <FormField
               control={form.control}
@@ -227,7 +283,7 @@ const UpsertTransactionDialog = ({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {TRANSACTION_CATEGORY_OPTIONS.map((option) => (
+                      {TRANSACTION_CATEGORIES_OPTIONS.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
                         </SelectItem>

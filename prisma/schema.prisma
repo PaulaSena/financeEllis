@@ -14,19 +14,20 @@ datasource db {
 }
 
 model Transaction {
-  id         String                @id @default(uuid())
-  name       String
-  type       TransactionType
-  amount     Decimal               @db.Decimal(10, 2)
-  categories TransactionCategories
-  category   TransactionCategory
-
-  paymentMethod TransactionPaymentMethod
-  description   String
-  date          DateTime
-  createdAt     DateTime                 @default(now())
-  updatedAt     DateTime                 @updatedAt
-  userId        String
+  id             String                    @id @default(uuid())
+  name           String
+  type           TransactionType
+  amount         Decimal                   @db.Decimal(10, 2)
+  categories     TransactionCategories
+  isRecurring    Boolean                   @default(false)
+  recurrenceType TransactionRecurrenceType
+  installments   Int?                      @default(1)
+  paymentMethod  TransactionPaymentMethod
+  description    String
+  date           DateTime
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
+  userId         String
 }
 
 enum TransactionType {
@@ -57,6 +58,12 @@ enum TransactionCategories {
   SALARY
   EDUCATION
   OTHER
+}
+
+enum TransactionRecurrenceType {
+  DAILY
+  WEEKLY
+  MONTHLY
 }
 
 enum TransactionPaymentMethod {

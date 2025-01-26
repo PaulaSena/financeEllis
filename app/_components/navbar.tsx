@@ -27,6 +27,7 @@ const Navbar = () => {
         >
           Dashboard
         </Link>
+
         <Link
           href="/transactions"
           className={
@@ -37,7 +38,7 @@ const Navbar = () => {
         >
           Transações
         </Link>
-        <Link href="/categories">Categorias</Link>
+
         <Link
           href="/subcription"
           className={

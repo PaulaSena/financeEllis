@@ -3,8 +3,9 @@
 import { db } from "@/app/_lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import {
-  TransactionCategory,
+  TransactionCategories,
   TransactionPaymentMethod,
+  TransactionRecurrenceType,
   TransactionType,
 } from "@prisma/client";
 import { upsertTransactionSchema } from "./schema";
@@ -15,7 +16,9 @@ interface UpsertTransactionParams {
   name: string;
   amount: number;
   type: TransactionType;
-  category: TransactionCategory;
+  categories: TransactionCategories;
+  isRecurring: false;
+  recurrenceType: TransactionRecurrenceType;
   paymentMethod: TransactionPaymentMethod;
   description: string;
   date: Date;

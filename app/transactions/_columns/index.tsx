@@ -6,7 +6,8 @@ import TransactionTypeBadge from "../_components/type-badge";
 import { Button } from "@/app/_components/ui/button";
 import { TrashIcon } from "lucide-react";
 import {
-  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_CATEGORIES_LABELS,
+  TRANSACTION_RECURRENCE_TYPE_LABELS,
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_constants/transactions";
 import EditTransactionButton from "../_components/edit-transaction-button";
@@ -25,12 +26,13 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
       <TransactionTypeBadge transaction={transaction} />
     ),
   },
+
   {
-    accessorKey: "category",
+    accessorKey: "categories",
     header: "Categoria",
     // Map Dicionario
     cell: ({ row: { original: transaction } }) =>
-      TRANSACTION_CATEGORY_LABELS[transaction.categories],
+      TRANSACTION_CATEGORIES_LABELS[transaction.categories],
   },
   {
     accessorKey: "paymentMethod",
@@ -38,6 +40,19 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     cell: ({ row: { original: transaction } }) =>
       TRANSACTION_PAYMENT_METHOD_LABELS[transaction.paymentMethod],
   },
+
+  {
+    accessorKey: "recurrenceType",
+    header: "Recorrência",
+    // Map Dicionario
+    cell: ({ row: { original: transaction } }) =>
+      TRANSACTION_RECURRENCE_TYPE_LABELS[transaction.recurrenceType],
+  },
+  {
+    accessorKey: "installments",
+    header: "Parcelas",
+  },
+
   {
     accessorKey: "date",
     header: "Data",

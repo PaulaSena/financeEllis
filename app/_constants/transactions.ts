@@ -1,10 +1,11 @@
 import {
-  TransactionCategory,
+  TransactionCategories,
   TransactionPaymentMethod,
   TransactionType,
+  TransactionRecurrenceType,
 } from "@prisma/client";
 
-export const TRANSACTION_CATEGORY_LABELS = {
+export const TRANSACTION_CATEGORIES_LABELS = {
   EDUCATION: "Educação",
   ENTERTAINMENT: "Entretenimento",
   FOOD: "Alimentação",
@@ -16,6 +17,11 @@ export const TRANSACTION_CATEGORY_LABELS = {
   UTILITY: "Utilidades",
 };
 
+export const TRANSACTION_RECURRENCE_TYPE_LABELS = {
+  DAILY: "Diário",
+  WEEKLY: "Semanal",
+  MONTHLY: "Mensal",
+};
 export const TRANSACTION_PAYMENT_METHOD_LABELS = {
   BANK_TRANSFER: "Transferência Bancária",
   BANK_SLIP: "Boleto Bancário",
@@ -76,41 +82,57 @@ export const TRANSACTION_PAYMENT_METHOD_OPTIONS = [
   },
 ];
 
-export const TRANSACTION_CATEGORY_OPTIONS = [
+export const TRANSACTION_CATEGORIES_OPTIONS = [
   {
-    value: TransactionCategory.EDUCATION,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.EDUCATION],
+    value: TransactionCategories.EDUCATION,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.EDUCATION],
   },
   {
-    value: TransactionCategory.ENTERTAINMENT,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.ENTERTAINMENT],
+    value: TransactionCategories.ENTERTAINMENT,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.ENTERTAINMENT],
   },
   {
-    value: TransactionCategory.FOOD,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.FOOD],
+    value: TransactionCategories.FOOD,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.FOOD],
   },
   {
-    value: TransactionCategory.HEALTH,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.HEALTH],
+    value: TransactionCategories.HEALTH,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.HEALTH],
   },
   {
-    value: TransactionCategory.HOUSING,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.HOUSING],
+    value: TransactionCategories.HOUSING,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.HOUSING],
   },
   {
-    value: TransactionCategory.OTHER,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.OTHER],
+    value: TransactionCategories.OTHER,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.OTHER],
   },
   {
-    value: TransactionCategory.SALARY,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.SALARY],
+    value: TransactionCategories.SALARY,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.SALARY],
   },
   {
-    value: TransactionCategory.TRANSPORTATION,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.TRANSPORTATION],
+    value: TransactionCategories.TRANSPORTATION,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.TRANSPORTATION],
   },
   {
-    value: TransactionCategory.UTILITY,
-    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.UTILITY],
+    value: TransactionCategories.UTILITY,
+    label: TRANSACTION_CATEGORIES_LABELS[TransactionCategories.UTILITY],
+  },
+];
+
+export const TRANSACTION_RECURRENCE_TYPE_OPTIONS = [
+  {
+    value: TransactionRecurrenceType.DAILY,
+    label: TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.DAILY],
+  },
+  {
+    value: TransactionRecurrenceType.MONTHLY,
+    label:
+      TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.MONTHLY],
+  },
+  {
+    value: TransactionRecurrenceType.WEEKLY,
+    label: TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.WEEKLY],
   },
 ];

@@ -2,11 +2,25 @@ import { db } from "../_lib/prisma";
 import { DataTable } from "../_components/ui/data-table";
 import transactionColumns from "./_columns";
 import AddTransactionButton from "../_components/add-transaction-button";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const TransactionsPage = async () => {
+  // se usuario nao logado redirecione para o login
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
+
   // Acessar as TRANSAÇÕES da tabela no banco de dados
 
-  const transactions = await db.transaction.findMany({});
+  const transactions = await db.transaction.findMany({
+    // Acessar apenas os dados do usuario atyal
+
+    where: {
+      userId,
+    },
+  });
 
   return (
     <div className="space-y-6 p-6">
