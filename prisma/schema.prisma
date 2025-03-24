@@ -36,18 +36,6 @@ enum TransactionType {
   INVESTMENT
 }
 
-enum TransactionCategory {
-  HOUSING
-  TRANSPORTATION
-  FOOD
-  ENTERTAINMENT
-  HEALTH
-  UTILITY
-  SALARY
-  EDUCATION
-  OTHER
-}
-
 enum TransactionCategories {
   HOUSING
   TRANSPORTATION
