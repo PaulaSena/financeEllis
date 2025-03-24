@@ -64,9 +64,6 @@ const formSchema = z.object({
   type: z.nativeEnum(TransactionType, {
     required_error: "O tipo é obrigatório.",
   }),
-  /* category: z.nativeEnum(TransactionCategory, {
-    required_error: "A categoria é obrigatória.",
-  }),*/
   isRecurring: z.boolean().optional(),
   recurrenceType: z.enum(["MONTHLY", "WEEKLY", "DAILY"]).optional(),
   installments: z
@@ -102,12 +99,10 @@ const UpsertTransactionDialog = ({
     defaultValues: defaultValues ?? {
       name: "",
       amount: 50,
-
       isRecurring: false,
       recurrenceType: TransactionRecurrenceType.DAILY,
-
+      installments: 1,
       categories: TransactionCategories.OTHER,
-
       paymentMethod: TransactionPaymentMethod.CASH,
       type: TransactionType.EXPENSE,
       description: "",
@@ -118,7 +113,7 @@ const UpsertTransactionDialog = ({
   const onSubmit = async (data: FormSchema) => {
     try {
       await upsertTransaction({
-        ...data,
+        data,
         id: transactionId,
       });
       setIsOpen(false);
@@ -301,7 +296,7 @@ const UpsertTransactionDialog = ({
               name="paymentMethod"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Metodo de Pagamento</FormLabel>
+                  <FormLabel>Método de Pagamento</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}

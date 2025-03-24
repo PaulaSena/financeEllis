@@ -17,8 +17,9 @@ interface UpsertTransactionParams {
   amount: number;
   type: TransactionType;
   categories: TransactionCategories;
-  isRecurring: false;
+  isRecurring: boolean;
   recurrenceType: TransactionRecurrenceType;
+  installments: number;
   paymentMethod: TransactionPaymentMethod;
   description: string;
   date: Date;
@@ -26,7 +27,7 @@ interface UpsertTransactionParams {
 
 export const upsertTransaction = async (params: UpsertTransactionParams) => {
   upsertTransactionSchema.parse(params);
-  const { userId } = await auth();
+  const { userId } = auth();
   if (!userId) {
     throw new Error("Unauthorized");
   }

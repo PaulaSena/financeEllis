@@ -40,9 +40,9 @@ const Navbar = () => {
         </Link>
 
         <Link
-          href="/subcription"
+          href="/subscription"
           className={
-            pathname === "/subcription"
+            pathname === "/subscription"
               ? "font-bold text-green-400"
               : "text-muted-foreground"
           }
