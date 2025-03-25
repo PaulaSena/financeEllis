@@ -5,7 +5,12 @@
     "plugin:react-hooks/recommended-legacy",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "next/core-web-vitals", // Regras recomendadas pelo Next.js
+    "plugin:@typescript-eslint/recommended", // Regras recomendadas para TypeScript
+    "plugin:import/recommended", // Regras recomendadas do eslint-plugin-import
+    "plugin:import/typescript", // Suporte a TypeScript no eslint-plugin-import
+    "eslint:recommended"
   ],
   "plugins": ["react", "react-hooks"],
   "rules": {

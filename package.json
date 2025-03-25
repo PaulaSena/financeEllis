@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "husky"
+    "lint": "next lint"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.7.5",
@@ -55,8 +54,8 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "husky": "^9.1.6",
     "lint-staged": "^12.3.2",
     "postcss": "^8",
     "prettier": "^3.3.3",

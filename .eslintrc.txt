@@ -6,7 +6,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended", // Regras recomendadas para TypeScript
     "plugin:import/recommended", // Regras recomendadas do eslint-plugin-import
     "plugin:import/typescript", // Suporte a TypeScript no eslint-plugin-import
-    "prettier", // Integração com Prettier para formatação automática
+    "eslint:recommended",
   ],
   plugins: ["@typescript-eslint", "import", "prettier"],
   settings: {
