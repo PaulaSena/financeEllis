@@ -1,77 +1,19 @@
 {
-  "parser": "@typescript-eslint/parser",
-
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "next/core-web-vitals",
-    "next",
+    // "next/core-web-vitals",
     "next/typescript",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended-legacy",
+    "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
-
-    "plugin: next/core-web-vitals"
+    "plugin:react-hooks/recommended"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "import",
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-    "prettier"
-  ],
+  "plugins": ["react", "react-hooks"],
   "rules": {
-    "react/react-in-jsx-scope": "off", // Desativa o aviso para importar React
-
-    "no-undef": "error",
-    "no-unused-vars": [
-      "warn",
-      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
-    ],
-
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      { "argsIgnorePattern": "^_" }
-    ],
-    "@typescript-eslint/explicit-function-return-type": "off", // Customize as needed
-    "@typescript-eslint/explicit-module-boundary-types": "off", // Customize as needed
-    "jsx-a11y/anchor-is-valid": "off", // Next.js handles anchor links differently
-    "sort-keys": ["error", "asc", { "caseSensitive": true, "natural": false }],
-    "no-console": "warn", // Warns on console.log for cleaner production code
-    "no-debugger": "warn" // Prevents accidental debugger statements in production
+    // Your custom rules here
   },
   "settings": {
     "react": {
-      "version": "detect" // Automatically detect the React version
-    },
-    "import/resolver": {
-      "typescript": {} // Makes sure ESLint can resolve TypeScript paths
+      "version": "detect" // Automatically detect the react version
     }
   }
 }
