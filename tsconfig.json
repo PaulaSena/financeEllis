@@ -20,6 +20,13 @@
     ],
     "paths": {
       "@/*": ["./*"]
+      // "@app": ["app/layout.tsx"],
+      // "@login": ["app/login/"],
+      // "@transactions": ["app/transactions/"],
+      // "@dashboard": ["app/dashboard/"],
+      // "@actions": ["app/_actions/"],
+      // "@constants": ["app/_constants/"],
+      // "@components": ["app/_components/"]
     },
     "typeRoots": [
       "./node_modules/@types", // Assegura que os tipos instalados sejam usados

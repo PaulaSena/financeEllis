@@ -32,7 +32,6 @@ module.exports = {
   },
   rules: {
     // Regras gerais
-    "prettier/prettier": "error",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }], // Evita erros para variáveis não usadas que começam com "_"
     "@typescript-eslint/explicit-module-boundary-types": "off", // Não exige tipagem explícita em funções exportadas
     "@typescript-eslint/no-explicit-any": "warn", // Evita o uso excessivo de `any`
@@ -60,19 +59,6 @@ module.exports = {
       "error",
       {
         devDependencies: ["**/*.test.ts", "**/*.test.tsx", "**/jest.setup.ts"],
-      },
-    ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        js: "never",
-        jsx: "never",
-        ts: "never",
-        tsx: "never",
-        json: "always",
-        mjs: "never",
-        cjs: "never",
       },
     ],
   },

@@ -32,7 +32,6 @@ module.exports = {
     },
   },
   rules: {
-    "prettier/prettier": "error",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "warn",
@@ -58,19 +57,6 @@ module.exports = {
       "error",
       {
         devDependencies: ["**/*.test.ts", "**/*.test.tsx", "**/jest.setup.ts"],
-      },
-    ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        js: "never",
-        jsx: "never",
-        ts: "never",
-        tsx: "never",
-        json: "always",
-        mjs: "never",
-        cjs: "never",
       },
     ],
   },
