@@ -17,7 +17,7 @@ interface UpsertTransactionParams {
   amount: number;
   type: TransactionType;
   categories: TransactionCategories;
-  isRecurring: boolean;
+  isRecurring?: boolean;
   recurrenceType: TransactionRecurrenceType;
   installments: number;
   paymentMethod: TransactionPaymentMethod;

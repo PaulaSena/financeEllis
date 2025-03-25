@@ -20,7 +20,11 @@ export const TRANSACTION_CATEGORIES_LABELS = {
 export const TRANSACTION_RECURRENCE_TYPE_LABELS = {
   DAILY: "Diário",
   WEEKLY: "Semanal",
+  BIWEEKLY: "Quinzenal",
   MONTHLY: "Mensal",
+  BIMONTHLY: "Bimestral",
+  QUARTERLY: "Trimestral",
+  YEARLY: "Anual",
 };
 export const TRANSACTION_PAYMENT_METHOD_LABELS = {
   BANK_TRANSFER: "Transferência Bancária",
@@ -127,12 +131,32 @@ export const TRANSACTION_RECURRENCE_TYPE_OPTIONS = [
     label: TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.DAILY],
   },
   {
+    value: TransactionRecurrenceType.WEEKLY,
+    label: TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.WEEKLY],
+  },
+  {
+    value: TransactionRecurrenceType.BIWEEKLY,
+    label:
+      TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.BIWEEKLY],
+  },
+  {
     value: TransactionRecurrenceType.MONTHLY,
     label:
       TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.MONTHLY],
   },
   {
-    value: TransactionRecurrenceType.WEEKLY,
-    label: TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.WEEKLY],
+    value: TransactionRecurrenceType.BIMONTHLY,
+    label:
+      TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.BIMONTHLY],
+  },
+  {
+    value: TransactionRecurrenceType.QUARTERLY,
+    label:
+      TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.QUARTERLY],
+  },
+
+  {
+    value: TransactionRecurrenceType.YEARLY,
+    label: TRANSACTION_RECURRENCE_TYPE_LABELS[TransactionRecurrenceType.YEARLY],
   },
 ];

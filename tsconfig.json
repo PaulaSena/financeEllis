@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ESNext", // Alterado para ESNext
+    "lib": ["dom", "dom.iterable", "esnext"], // Libs essenciais para o ambiente Next.js
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "ESNext", // Permite usar os módulos ES
+    "moduleResolution": "node", // Garantir que seja compatível com Node.js
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -20,7 +20,12 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "typeRoots": [
+      "./node_modules/@types", // Assegura que os tipos instalados sejam usados
+      "./types" // Caso você tenha tipos personalizados
+    ],
+    "types": ["node"] // Se você estiver usando o Jest ou tipos de Node.js
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

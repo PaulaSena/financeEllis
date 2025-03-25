@@ -29,6 +29,7 @@ import {
 import {
   TRANSACTION_CATEGORIES_OPTIONS,
   TRANSACTION_PAYMENT_METHOD_OPTIONS,
+  TRANSACTION_RECURRENCE_TYPE_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
 } from "../_constants/transactions";
 import { DatePicker } from "./ui/date-picker";
@@ -64,8 +65,9 @@ const formSchema = z.object({
   type: z.nativeEnum(TransactionType, {
     required_error: "O tipo é obrigatório.",
   }),
-  isRecurring: z.boolean().optional(),
-  recurrenceType: z.enum(["MONTHLY", "WEEKLY", "DAILY"]).optional(),
+  //isRecurring: z.boolean().optional(),
+  isRecurring: z.boolean().default(false),
+  recurrenceType: z.nativeEnum(TransactionRecurrenceType).optional(),
   installments: z
     .number()
     .positive("O número de parcelas deve ser positivo.")
@@ -112,10 +114,59 @@ const UpsertTransactionDialog = ({
 
   const onSubmit = async (data: FormSchema) => {
     try {
+      const { installments, date, recurrenceType, isRecurring } = data;
+
+      if (isRecurring && installments && installments > 1) {
+        const transactions = Array.from({ length: installments }, (_, i) => {
+          const newDate = new Date(date);
+
+          switch (recurrenceType) {
+            case TransactionRecurrenceType.DAILY:
+              newDate.setDate(date.getDate() + (i + 1)); // Adiciona 1 dia por parcela
+              break;
+            case TransactionRecurrenceType.WEEKLY:
+              newDate.setDate(date.getDate() + 7 * (i + 1)); // Adiciona 7 dias por parcela
+              break;
+            case TransactionRecurrenceType.BIWEEKLY: // Quinzenal
+              newDate.setDate(date.getDate() + 14 * (i + 1)); // Adiciona 14 dias por parcela
+              break;
+            case TransactionRecurrenceType.MONTHLY:
+              newDate.setMonth(date.getMonth() + (i + 1)); // Adiciona 1 mês por parcela
+              break;
+            case TransactionRecurrenceType.BIMONTHLY: // Bimestral
+              newDate.setMonth(date.getMonth() + 2 * (i + 1)); // Adiciona 2 meses por parcela
+              break;
+            case TransactionRecurrenceType.QUARTERLY: // Trimestral
+              newDate.setMonth(date.getMonth() + 3 * (i + 1)); // Adiciona 3 meses por parcela
+              break;
+            case TransactionRecurrenceType.YEARLY:
+              newDate.setFullYear(date.getFullYear() + (i + 1)); // Adiciona 1 ano por parcela
+              break;
+          }
+
+          return { ...data, date: newDate, id: undefined };
+        });
+
+        await Promise.all(
+          transactions.map((transaction) => {
+            const { recurrenceType, installments, ...rest } = transaction;
+
+            return upsertTransaction({
+              ...rest,
+              recurrenceType: recurrenceType ?? TransactionRecurrenceType.DAILY, // Garante um valor válido
+              installments: installments ?? 1, // Se for undefined, define como 1
+              isRecurring: transaction.isRecurring ?? false,
+            });
+          }),
+        );
+      }
       await upsertTransaction({
-        data,
+        ...data,
         id: transactionId,
+        recurrenceType: data.recurrenceType ?? TransactionRecurrenceType.DAILY,
+        installments: data.installments ?? 1,
       });
+
       setIsOpen(false);
       form.reset();
     } catch (error) {
@@ -232,9 +283,11 @@ const UpsertTransactionDialog = ({
                           <SelectValue placeholder="Selecione o tipo de recorrência" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="DAILY">Diária</SelectItem>
-                          <SelectItem value="WEEKLY">Semanal</SelectItem>
-                          <SelectItem value="MONTHLY">Mensal</SelectItem>
+                          {TRANSACTION_RECURRENCE_TYPE_OPTIONS.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -253,6 +306,9 @@ const UpsertTransactionDialog = ({
                           type="number"
                           placeholder="Digite o número de parcelas"
                           {...field}
+                          onChange={(e) =>
+                            field.onChange(Number(e.target.value))
+                          } //para garantir que ele seja tratado como número
                         />
                       </FormControl>
                       <FormMessage />
@@ -314,7 +370,6 @@ const UpsertTransactionDialog = ({
                       ))}
                     </SelectContent>
                   </Select>
-
                   <FormMessage />
                 </FormItem>
               )}
